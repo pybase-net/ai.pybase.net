@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  jupyterlab:
+    image: jupyter/base-notebook:latest
+    container_name: jupyterlab
+    ports:
+      - "8888:8888" # Map the JupyterLab port to the host
+    volumes:
+      - ./:/home/jovyan/work # Sync the current folder to the container
+    environment:
+      - JUPYTER_ENABLE_LAB=yes # Enable JupyterLab interface
+      - NB_UID=1000 # Set user ID to avoid permission issues
+      - NB_GID=1000 # Set group ID to avoid permission issues
+    command: start-notebook.sh # Default command to start JupyterLab
